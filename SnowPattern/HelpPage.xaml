@@ -1,0 +1,37 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="SnowPattern.HelpPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Landscape" Orientation="Landscape"
+    shell:SystemTray.IsVisible="False">
+
+    <Grid>
+		<Grid.Background>
+			<ImageBrush ImageSource="/Assets/Background.jpg" Stretch="UniformToFill"/>
+		</Grid.Background>
+		<Grid>
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="2*"/>
+					<RowDefinition Height="13*"/>
+				</Grid.RowDefinitions>
+				<!-- 			-->
+
+				<StackPanel Grid.Row="0" Background="#0168b3" Opacity="0.8">
+				<TextBlock Foreground="Wheat" Margin="10,10,10,0"  FontSize="32" x:Name="pageTitlePaused" Grid.Column="1" Text="{Binding Path=AppResources.HelpPageTitle, Source={StaticResource LocalizedStrings}}"/>
+				</StackPanel>
+
+				<TextBlock Margin="30,10,30,0" TextWrapping="Wrap" FontSize="24" Foreground="Black" FontWeight="SemiBold" Text="{Binding Path=AppResources.HelpText, Source={StaticResource LocalizedStrings}}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+			</Grid>
+		</Grid>
+	</Grid>
+</phone:PhoneApplicationPage>

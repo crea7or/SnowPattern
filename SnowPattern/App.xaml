@@ -1,0 +1,166 @@
+﻿<Application
+    x:Class="SnowPattern.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:local="clr-namespace:SnowPattern;assembly=SnowPattern"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+	xmlns:SnowPatternLNG="clr-namespace:SnowPatternLNG;assembly=SnowPatternLNG">
+	<!--Application Resources-->
+    <Application.Resources>
+
+		<SnowPatternLNG:LocalizedStrings xmlns:local="clr-namespace:SnowPattern" x:Key="LocalizedStrings" />
+
+		<Style x:Key="headerPageStyle" TargetType="TextBlock" BasedOn="{StaticResource PhoneTextTitle1Style}" >
+			<Setter Property="Margin" Value="10,-20,0,0"/>
+		</Style>
+
+		<Style x:Key="StatTextStyle" TargetType="TextBlock">
+			<Setter Property="Margin" Value="0,0,10,0"/>
+			<Setter Property="HorizontalAlignment" Value="Right"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="FontSize" Value="20"/>
+			<Setter Property="FontFamily" Value="Segoe UI Semilight"/>
+			<Setter Property="Foreground" Value="Black"/>
+		</Style>
+
+		<Style x:Key="StatValueStyle" TargetType="TextBlock">
+			<Setter Property="Margin" Value="10,0,0,0"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="FontFamily" Value="Segoe UI Semilight"/>
+			<Setter Property="FontSize" Value="20"/>
+			<Setter Property="Foreground" Value="Black"/>
+		</Style>
+
+		<Style TargetType="local:Snowflake">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="local:Snowflake">
+						<Viewbox>
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup x:Name="PieceStates">
+									<VisualStateGroup.Transitions>
+
+										<VisualTransition From="FlakeSet" To="None" GeneratedDuration="0:0:0.4">
+											<Storyboard>
+												<DoubleAnimation Duration="0:0:0.4" To="180" Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationX)" Storyboard.TargetName="pieceEllipse"/>
+											</Storyboard>
+											<VisualTransition.GeneratedEasingFunction>
+												<CircleEase EasingMode="EaseInOut"/>
+											</VisualTransition.GeneratedEasingFunction>
+										</VisualTransition>
+
+										<VisualTransition From="None" To="FlakeSet" GeneratedDuration="0:0:0.4">
+											<VisualTransition.GeneratedEasingFunction>
+												<CircleEase EasingMode="EaseInOut"/>
+											</VisualTransition.GeneratedEasingFunction>
+											<Storyboard>
+												<DoubleAnimation Duration="0:0:0.4" To="180" Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationX)" Storyboard.TargetName="pieceEllipse"/>
+											</Storyboard>
+										</VisualTransition>
+
+										<VisualTransition From="None" To="HintSet" GeneratedDuration="0:0:0.4">
+											<VisualTransition.GeneratedEasingFunction>
+												<CircleEase EasingMode="EaseInOut"/>
+											</VisualTransition.GeneratedEasingFunction>
+											<Storyboard>
+												<ColorAnimation Duration="0:0:0.4" To="#108af1" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" Storyboard.TargetName="backgroundSquare"/>
+											</Storyboard>
+										</VisualTransition>
+
+										<VisualTransition From="FlakeSet" To="HintSet" GeneratedDuration="0:0:0.4">
+											<VisualTransition.GeneratedEasingFunction>
+												<CircleEase EasingMode="EaseInOut"/>
+											</VisualTransition.GeneratedEasingFunction>
+											<Storyboard>
+												<ColorAnimation Duration="0:0:0.4" To="#108af1" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" Storyboard.TargetName="backgroundSquare"/>
+												<DoubleAnimation Duration="0:0:0.4" To="180" Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationX)" Storyboard.TargetName="pieceEllipse"/>
+											</Storyboard>
+										</VisualTransition>
+
+									</VisualStateGroup.Transitions>
+									<VisualState x:Name="None">
+									</VisualState>
+
+									<VisualState x:Name="FlakeSet">
+										<Storyboard>
+											<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="pieceEllipse"/>
+											<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="pieceEllipse"/>
+											<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="pieceEllipse"/>
+										</Storyboard>
+									</VisualState>
+									<VisualState x:Name="HintSet">
+										<Storyboard>
+											<ColorAnimation Duration="0" To="#108af1" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" Storyboard.TargetName="backgroundSquare"/>
+											<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="pieceEllipse"/>
+											<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="pieceEllipse"/>
+											<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="pieceEllipse"/>
+										</Storyboard>
+									</VisualState>
+									<VisualState x:Name="HintNone">
+										<Storyboard>
+											<ColorAnimation Duration="0" To="#108af1" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" Storyboard.TargetName="backgroundSquare"/>
+										</Storyboard>
+									</VisualState>
+								</VisualStateGroup>
+
+								<VisualStateGroup x:Name="CommonStates">
+									<VisualStateGroup.Transitions>
+										<VisualTransition To="Pressed" GeneratedDuration="0:0:0.3"/>
+									</VisualStateGroup.Transitions>
+									<VisualState x:Name="Normal">
+										<Storyboard>
+											<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="pieceEllipse"/>
+										</Storyboard>
+									</VisualState>
+									<VisualState x:Name="PointerOver">
+										<Storyboard>
+											<DoubleAnimation Duration="0" To="0.2" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="backgroundSquare"/>
+											<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="pieceEllipse"/>
+										</Storyboard>
+									</VisualState>
+									<VisualState x:Name="Pressed">
+										<Storyboard>
+											<DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="backgroundSquare"/>
+											<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="pieceEllipse"/>
+										</Storyboard>
+									</VisualState>
+									<VisualState x:Name="Disabled"/>
+								</VisualStateGroup>
+								<VisualStateGroup x:Name="FocusStates">
+									<VisualState x:Name="Focused"/>
+									<VisualState x:Name="Unfocused"/>
+									<VisualState x:Name="PointerFocused"/>
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+
+
+							<Grid Height="64" Width="64">
+								<Border x:Name="backgroundSquare" Background="Black" Margin="4" Opacity="0.5"/>
+								<Image x:Name="pieceEllipse" Source="Assets/stellar-plate.png" Height="64" Width="64">
+									<Image.Projection>
+										<PlaneProjection/>
+									</Image.Projection>
+									<Image.RenderTransform>
+										<CompositeTransform ScaleX="0" ScaleY="0" CenterX="32" CenterY="32"/>
+									</Image.RenderTransform>
+								</Image>
+							</Grid>
+						</Viewbox>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+
+	</Application.Resources>
+
+    <Application.ApplicationLifetimeObjects>
+        <!--Required object that handles lifetime events for the application-->
+
+		<shell:PhoneApplicationService
+            Launching="Application_Launching" Closing="Application_Closing"
+            Activated="Application_Activated" Deactivated="Application_Deactivated"/>
+    </Application.ApplicationLifetimeObjects>
+
+</Application>

@@ -1,0 +1,132 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="SnowPattern.GamePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Landscape" Orientation="Landscape"
+    shell:SystemTray.IsVisible="False">
+
+	<Grid>
+		<Grid.Background>
+			<ImageBrush ImageSource="/Assets/Background.jpg" Stretch="UniformToFill"/>
+		</Grid.Background>
+
+		<Grid x:Name="GamePlay">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="1*"/>
+				<RowDefinition Height="5*"/>
+				<RowDefinition Height="5*"/>
+	
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="1*"/>
+				<ColumnDefinition Width="2*"/>
+			</Grid.ColumnDefinitions>
+
+			<TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Path=AppResources.GameSampleBoard, Source={StaticResource LocalizedStrings}}" FontFamily="Segoe UI Light" FontSize="22" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+
+
+			<!-- Sample Field  -->
+			<Grid Grid.Row="1" Grid.Column="0" x:Name="SampleBoard" VerticalAlignment="Top">
+
+				<!-- Board Background-->
+				<Grid Width="{Binding Width, Mode=OneWay, ElementName=SampleGrid}" Height="{Binding Height, Mode=OneWay, ElementName=SampleGrid}" x:Name="SampleGridBkg" Background="Black" Opacity="0.8"/>
+
+				<Grid x:Name="SampleGrid">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="1*"/>
+						<RowDefinition Height="1*"/>
+						<RowDefinition Height="1*"/>
+						<RowDefinition Height="1*"/>
+						<RowDefinition Height="1*"/>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="1*"/>
+						<ColumnDefinition Width="1*"/>
+						<ColumnDefinition Width="1*"/>
+						<ColumnDefinition Width="1*"/>
+						<ColumnDefinition Width="1*"/>
+						<ColumnDefinition Width="1*"/>
+						<ColumnDefinition Width="1*"/>
+					</Grid.ColumnDefinitions>
+				</Grid>
+			
+			</Grid>
+			<!-- 			<local:SampleBoard x:Name="SampleBoard" Margin="20,0,100,0" VerticalAlignment="Top"/> -->
+
+			<Grid Grid.Row="2" Grid.Column="0">
+				<!-- Info Field  -->
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="*"/>
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="1*"/>
+					<ColumnDefinition Width="1*"/>
+				</Grid.ColumnDefinitions>
+
+				<StackPanel Grid.Row="0" Grid.Column="0">
+					<TextBlock Text="{Binding Path=AppResources.GameStatGame, Source={StaticResource LocalizedStrings}}" Style="{StaticResource StatTextStyle}"/>
+					<TextBlock Text="{Binding Path=AppResources.GameStatLevel, Source={StaticResource LocalizedStrings}}" Style="{StaticResource StatTextStyle}"/>
+					<TextBlock Text="{Binding Path=AppResources.GameStatTime, Source={StaticResource LocalizedStrings}}" Style="{StaticResource StatTextStyle}"/>
+					<TextBlock Text="{Binding Path=AppResources.GameStatTotalTime, Source={StaticResource LocalizedStrings}}" Style="{StaticResource StatTextStyle}"/>
+				</StackPanel>
+
+				<StackPanel Grid.Row="0" Grid.Column="1">
+					<TextBlock Name="GameStatGame" Style="{StaticResource StatValueStyle}"/>
+					<TextBlock Name="GameStatLevel" Style="{StaticResource StatValueStyle}"/>
+					<TextBlock Name="GameStatTime" Style="{StaticResource StatValueStyle}"/>
+					<TextBlock Name="GameStatTotalTime" Style="{StaticResource StatValueStyle}"/>
+				</StackPanel>
+				<Button Grid.Row="1" Grid.Column="0" Foreground="Black" BorderBrush="Black" Grid.ColumnSpan="2" Content="{Binding Path=AppResources.HintButton, Source={StaticResource LocalizedStrings}}"  HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="72" Width="200" Click="HintButtonClick"/>
+			</Grid>
+
+
+			<TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=AppResources.GameBoard, Source={StaticResource LocalizedStrings}}" FontFamily="Segoe UI Light" FontSize="22" Foreground="Black"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+			<!-- Game Field  -->
+			<Grid x:Name="GameBoard" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Margin="5,0,5,5" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+
+				<!-- Board Background-->
+				<StackPanel Width="{Binding Width, Mode=OneWay, ElementName=BoardGrid}" Height="{Binding Height, Mode=OneWay, ElementName=BoardGrid}" x:Name="BoardGridBkg" Background="Black" Opacity="0.8"/>
+
+				<Grid x:Name="BoardGrid">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="1*"/>
+						<RowDefinition Height="1*"/>
+						<RowDefinition Height="1*"/>
+						<RowDefinition Height="1*"/>
+						<RowDefinition Height="1*"/>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="1*"/>
+						<ColumnDefinition Width="1*"/>
+						<ColumnDefinition Width="1*"/>
+						<ColumnDefinition Width="1*"/>
+						<ColumnDefinition Width="1*"/>
+						<ColumnDefinition Width="1*"/>
+						<ColumnDefinition Width="1*"/>
+					</Grid.ColumnDefinitions>
+				</Grid>
+
+
+				<Grid x:Name="GameBoardMessage" Width="{Binding Width, Mode=OneWay, ElementName=BoardGrid}" Height="{Binding Height, Mode=OneWay, ElementName=BoardGrid}" Opacity="0.8" Background="Black"  Visibility="Collapsed">
+					<StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+						<TextBlock x:Name="GameMessage" FontSize="20" Text=""/>
+					</StackPanel>
+				</Grid>				
+			</Grid>
+
+			<Button  Grid.Row="2" Grid.Column="1" VerticalAlignment="Bottom" Foreground="Black" BorderBrush="Black" Content="{Binding Path=AppResources.GameResetBoardButton, Source={StaticResource LocalizedStrings}}"  HorizontalAlignment="Center" Height="72" Width="240" Click="GridRightTapped"/>
+
+		</Grid>
+	</Grid>
+</phone:PhoneApplicationPage>
